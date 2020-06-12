@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">AdoptMyPet</string>
+    <string name="google_login">Continue with Google</string>
+    <string name="facebook_login">Continue with Facebook</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="forget_password">Forgot Password?</string>
+    <string name="create_account">Create a new account</string>
+    <string name="separator">|</string>
+    <string name="terms"><u>Terms and Conditions</u></string>
+    <string name="privacy"><u>Privacy Policy</u></string>
+    <string name="welcome">Bine ai venit %1$s!</string>
+    <string name="thank_you">Multumim ca ati ales sa folositi aplicatia noastra. Pentru a incepe cautarile animalutului perfect pentru tine sau pentru a gasi un stapan responsabil pentru animalutul tau va trebui sa raspunzi la cateva intrebari.</string>
+    <string name="adopting">Vreau sa adopt</string>
+    <string name="adopter">Vreau sa dau spre adoptie</string>
+    <string name="question_ex">Do you have any disabilities or functional limitations?</string>
+    <string name="description_ex">There are people with certain needs who love to have a protective soul by their side. Fortunately, there are animals that have so far been trained to accompany these people</string>
+    <string name="answer_1">I have locomotor disabilities</string>
+    <string name="answer_2">I have sight limitations</string>
+    <string name="answer_3">I have other disabilities</string>
+    <string name="answer_4">I don’t have any disabilities</string>
+    <string name="page_number_ex">7/10</string>
+    <string name="error_on_login">Parola sau username incorect.</string>
+    <string name="password_mismatch">Nu ati introdus aceiasi parola!</string>
+    <string name="register_error">Contul deja exista sau ati introdus date invalide.</string>
+    <string name="incorrect_data">Datele introduse nu sunt valide.</string>
+    <string name="adopting_description">Caut un animalut potrivit pentru mine si nevoile mele</string>
+    <string name="adopter_description">Caut stapan responsabil si iubitor pentru animalutul meu</string>
+    <string name="number_of_founds_sample">S-au gasit x rezultate</string>
+</resources>
