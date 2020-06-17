@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    tools:context=".presentation.MainActivity">
+
+
+    <ImageView
+        android:id="@+id/logoImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo_adoptlab"
+        app:layout_constraintBottom_toTopOf="@id/butttonsLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <LinearLayout
+        android:id="@+id/butttonsLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoImage"
+        app:layout_constraintWidth_percent="0.75">
+
+        <Button
+            android:id="@+id/googleButton"
+            style="@style/loginButton"
+            android:layout_width="match_parent"
+            android:background="@drawable/google_button_rounded"
+            android:text="@string/google_login" />
+
+        <Button
+            android:id="@+id/facebookButton"
+            style="@style/loginButton"
+            android:layout_width="match_parent"
+            android:background="@drawable/facebook_button_rounded"
+            android:text="@string/facebook_login" />
+
+        <EditText
+            android:id="@+id/tvEmail"
+            style="@style/loginInput"
+            android:layout_width="match_parent"
+            android:background="@drawable/empty_button_rounded"
+            android:hint="@string/email"
+            android:inputType="text"
+            android:textColor="#FFFFFF" />
+
+        <EditText
+            android:id="@+id/tvPassword"
+            style="@style/loginInput"
+            android:layout_width="match_parent"
+            android:background="@drawable/empty_button_rounded"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/loginButton"
+            style="@style/loginButton"
+            android:layout_width="match_parent"
+            android:background="@drawable/login_button_rounded"
+            android:fontFamily="@font/opensans_regular"
+            android:text="@string/login"
+            android:textColor="@color/deepBlue"
+            android:textSize="24dp"
+            android:onClick="onLoginSubmit"/>
+
+        <LinearLayout
+            android:id="@+id/infoLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:textAlignment="center">
+
+            <TextView
+                android:id="@+id/registerReference"
+                style="@style/loginText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/create_account" />
+
+            <TextView
+                style="@style/loginText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/separator" />
+
+            <TextView
+                style="@style/loginText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/forget_password" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/terms_conditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:text="@string/terms" />
+
+        <TextView
+            style="@style/terms_conditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="@string/privacy" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#03437B</color>
+    <color name="colorPrimaryDark">#0B425E</color>
+    <color name="colorAccent">#138F9B</color>
+    <color name="googleButton">#4184F3</color>
+    <color name="facebookButton">#3A559F</color>
+    <color name="deepBlue">#0E3183</color>
+    <color name="blueDescription">#2A6F93</color>
+</resources>
