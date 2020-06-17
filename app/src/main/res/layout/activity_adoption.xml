@@ -9,6 +9,50 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"/>
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/phoneNo"
+            style="@style/loginInput"
+            android:layout_width="match_parent"
+            android:background="@drawable/empty_button_rounded"
+            android:hint="@string/phoneNo"
+            android:inputType="text"
+            android:textColor="#FFFFFF"/>
+        <EditText
+            android:id="@+id/fullName"
+            style="@style/loginInput"
+            android:layout_width="match_parent"
+            android:background="@drawable/empty_button_rounded"
+            android:hint="@string/fullName"
+            android:inputType="text"
+            android:textColor="#FFFFFF"/>
+        <TextView
+            android:layout_marginTop="10dp"
+            style="@style/terms_conditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/consent_adoption"/>
+        <Button
+            style="@style/loginButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/login_button_rounded"
+            android:fontFamily="@font/opensans_regular"
+            android:text="@string/apply"
+            android:textColor="@color/deepBlue"
+            android:textSize="24dp" />
+    </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

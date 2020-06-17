@@ -36,4 +36,8 @@
     <string name="petStory">Povestea animalutului</string>
     <string name="addPet">Adauga</string>
     <string name="choose_photo_sample">Adauga poze cu animalutul tau</string>
+    <string name="phoneNo">Numarul de telefon</string>
+    <string name="fullName">Numele si prenumele</string>
+    <string name="apply">Aplica</string>
+    <string name="consent_adoption">Prin aplicarea pentru aceasta adoptie sunt de acord ca numarul meu de telefon si numele meu complet sa ajunga in posesia donatorului.</string>
 </resources>
