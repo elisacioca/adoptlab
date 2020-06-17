@@ -1,3 +1,4 @@
+
 # Created by https://www.toptal.com/developers/gitignore/api/android,androidstudio,kotlin
 # Edit at https://www.toptal.com/developers/gitignore?templates=android,androidstudio,kotlin
 
@@ -223,3 +224,6 @@ fabric.properties
 !/gradle/wrapper/gradle-wrapper.jar
 
 # End of https://www.toptal.com/developers/gitignore/api/android,androidstudio,kotlin
+app/src/.idea/modules.xml
+app/src/.idea/workspace.xml
+app/src/.idea/codeStyles/Project.xml
