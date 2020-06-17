@@ -12,7 +12,7 @@ class FeedViewModel : ViewModel() {
     val listOfPets = MutableLiveData<List<Pet>>()
 
     fun getListOfPets() {
-        service.getPets().enqueue(object : Callback<List<Pet>> {
+        service.getPetsByStatistics(100, 100, 100).enqueue(object : Callback<List<Pet>> {
             override fun onFailure(call: Call<List<Pet>>, t: Throwable) {
                 TODO("Not yet implemented")
             }
