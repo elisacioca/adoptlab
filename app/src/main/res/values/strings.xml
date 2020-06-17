@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">AdoptMyPet</string>
     <string name="google_login">Continue with Google</string>
     <string name="facebook_login">Continue with Facebook</string>
@@ -30,4 +30,12 @@
     <string name="adopting_description">Caut un animalut potrivit pentru mine si nevoile mele</string>
     <string name="adopter_description">Caut stapan responsabil si iubitor pentru animalutul meu</string>
     <string name="number_of_founds_sample">S-au gasit x rezultate</string>
+    <string name="refresh">Refresh</string>
+    <string name="read_more">Read more</string>
+    <string name="adopt_now">Adopt now</string>
+    <string name="name_animal_item" >Name:</string>
+    <string name="breed_animal_item">Breed:</string>
+    <string name="color_animal_item">Color:</string>
+    <string name="age_animal_item">Age:</string>
+    <string name="unknown">unknown</string>
 </resources>
