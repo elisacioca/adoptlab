@@ -9,9 +9,9 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
+import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
@@ -21,8 +21,9 @@ import com.example.adoptmypet.api.ServiceFactory
 import com.example.adoptmypet.models.Adoption
 import com.example.adoptmypet.models.Location
 import com.example.adoptmypet.models.Pet
-import com.example.adoptmypet.presentation.AdoptionDialog
+import com.example.adoptmypet.presentation.dialogs.AdoptionDialog
 import com.example.adoptmypet.presentation.PetDetailsActivity
+import com.example.adoptmypet.presentation.dialogs.SuccessDialog
 import com.example.adoptmypet.utils.gson
 import com.example.adoptmypet.utils.service
 import com.google.android.gms.location.*
@@ -240,12 +241,14 @@ class FeedActivity : AppCompatActivity(),
         val intent = Intent(this, PetDetailsActivity::class.java)
         val jsonPet = gson.toJson(item)
         intent.putExtra("pet", jsonPet)
+        intent.putExtra("questionnaire", questionnaire)
         startActivity(intent)
     }
 
     override fun onAdoptClicked(item: Pet) {
         pet = item
-        val dialog: AdoptionDialog = AdoptionDialog()
+        val dialog: AdoptionDialog =
+            AdoptionDialog()
         dialog.show(supportFragmentManager, "Adoption dialog")
     }
 
@@ -259,14 +262,24 @@ class FeedActivity : AppCompatActivity(),
                 fullNameAdopter = fullName,
                 questionnaireAdopter = questionnaire
             )
-            service.addAdoption(adoption)
+            service.addAdoption(adoption) .enqueue(object : Callback<Adoption> {
+                override fun onFailure(call: Call<Adoption>, t: Throwable) {
+                    Log.e("FeedViewModel", t.localizedMessage ?: "")
+                }
+                override fun onResponse(call: Call<Adoption>, response: Response<Adoption>) {
+                    response.body().let {
+                        val dialog: SuccessDialog = SuccessDialog()
+                        dialog.show(supportFragmentManager, "Success")
+                    }
+                }
+            })
         }
     }
 
     override fun getDetails() {
         val intent = Intent(this, PetDetailsActivity::class.java)
-            val jsonPet = gson.toJson(pet)
-            intent.putExtra("pet", jsonPet)
-            startActivity(intent)
+        val jsonPet = gson.toJson(pet)
+        intent.putExtra("pet", jsonPet)
+        startActivity(intent)
     }
 }

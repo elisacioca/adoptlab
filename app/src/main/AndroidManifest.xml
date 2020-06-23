@@ -20,9 +20,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".presentation.PetDetailsActivity"></activity>
+        <activity android:name=".presentation.adoption_details.AdoptionDetailsActivity"></activity>
+        <activity android:name=".presentation.PetDetailsActivity" />
         <activity android:name=".presentation.pets.PetsActivity" />
-        <activity android:name=".presentation.AdoptionActivity" />
+        <activity android:name=".presentation.adoptions.AdoptionsActivity" />
         <activity android:name=".presentation.PetDescriptionActivity" />
         <activity android:name=".presentation.feed.FeedActivity" />
         <activity android:name=".presentation.questionnaire.QuestionnaireActivity" />

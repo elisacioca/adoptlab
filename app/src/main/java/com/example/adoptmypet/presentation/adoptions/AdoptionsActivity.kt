@@ -13,6 +13,7 @@ import com.example.adoptmypet.R
 import com.example.adoptmypet.models.Adoption
 import com.example.adoptmypet.models.Pet
 import com.example.adoptmypet.presentation.PetDetailsActivity
+import com.example.adoptmypet.presentation.adoption_details.AdoptionDetailsActivity
 import com.example.adoptmypet.utils.gson
 import com.example.adoptmypet.utils.service
 import kotlinx.android.synthetic.main.acitivity_pets.*
@@ -37,7 +38,7 @@ class AdoptionsActivity : AppCompatActivity(),
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
-        setContentView(R.layout.acitivity_pets)
+        setContentView(R.layout.activity_adoption)
         setupAdapter()
         observeEvents()
 
@@ -65,6 +66,9 @@ class AdoptionsActivity : AppCompatActivity(),
     }
 
     override fun onDetailsItemClicked(item: Adoption) {
-
+        val intent = Intent(this, AdoptionDetailsActivity::class.java)
+        val jsonPet = gson.toJson(item)
+        intent.putExtra("adoption", jsonPet)
+        startActivity(intent)
     }
 }
