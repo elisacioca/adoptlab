@@ -2,13 +2,13 @@ package com.example.adoptmypet.presentation
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.adoptmypet.R
 import com.example.adoptmypet.api.ServiceFactory
 import com.example.adoptmypet.models.User
@@ -27,16 +27,20 @@ class MainActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         setContentView(R.layout.activity_main)
-        logoImage.animation = AnimationUtils.loadAnimation(this,
+        logoImage.animation = AnimationUtils.loadAnimation(
+            this,
             R.anim.top_fade_animation
         )
-        butttonsLayout.animation = AnimationUtils.loadAnimation(this,
+        butttonsLayout.animation = AnimationUtils.loadAnimation(
+            this,
             R.anim.fade_animation
         )
         registerReference.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
+
+        ErrorDialog.show(this)
     }
 
     fun onLoginSubmit(view: View) {
@@ -48,6 +52,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onFailure(call: Call<User>, t: Throwable) {
                     Log.e("MainActivity", t.localizedMessage)
                 }
+
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     if (response.isSuccessful) {
                         response.body().let { userReceived ->
@@ -57,18 +62,20 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     if (response.code() == 401) {
-                        Toast.makeText(applicationContext,
-                            resources.getString(R.string.error_on_login),Toast. LENGTH_SHORT).show()
+                        Toast.makeText(
+                            applicationContext,
+                            resources.getString(R.string.error_on_login), Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             });
     }
 
-    private fun goToNextPage(user : User) {
+    private fun goToNextPage(user: User) {
         val intent = Intent(this, WelcomeActivity::class.java)
-        val sharedPreference =  getSharedPreferences("PREFERENCE_NAME",Context.MODE_PRIVATE)
+        val sharedPreference = getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
         var editor = sharedPreference.edit()
-        editor.putString("token",user.token)
+        editor.putString("token", user.token)
         editor.putString("username", user.username)
         editor.commit()
         intent.putExtra("user_name", user.name)
@@ -76,7 +83,6 @@ class MainActivity : AppCompatActivity() {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent)
     }
-
 
 
 }

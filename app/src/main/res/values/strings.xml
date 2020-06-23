@@ -55,6 +55,8 @@
     <string name="phoneNo">Numarul de telefon</string>
     <string name="my_pets">My pets</string>
     <string name="home">Home</string>
+    <string name="nici_un_rezultat_gasit">Ne pare rau, nu s-a gasit nici un rezultat gasit</string>
+    <string name="ne_pare_rau_am_intampinat_o_problema">Ne pare rau, am intampinat o problema.</string>
     <string-array name="sex_array">
         <item>Feminin</item>
         <item>Masculin</item>
