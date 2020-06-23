@@ -21,12 +21,11 @@
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/topAppBar"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                android:background="#fff"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:backgroundTint="#fff"
-                app:menu="@menu/feed_menu"
-                app:navigationIcon="@drawable/ic_baseline_menu_24" />
+                app:menu="@menu/main_menu" />
         </com.google.android.material.appbar.AppBarLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

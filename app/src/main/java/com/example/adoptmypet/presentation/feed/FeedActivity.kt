@@ -9,9 +9,10 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
+import android.view.Menu
+import android.view.MenuItem
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
@@ -23,6 +24,7 @@ import com.example.adoptmypet.models.Location
 import com.example.adoptmypet.models.Pet
 import com.example.adoptmypet.presentation.AdoptionDialog
 import com.example.adoptmypet.presentation.PetDetailsActivity
+import com.example.adoptmypet.presentation.WelcomeActivity
 import com.example.adoptmypet.utils.gson
 import com.example.adoptmypet.utils.service
 import com.google.android.gms.location.*
@@ -32,11 +34,12 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FeedActivity : AppCompatActivity(),
-    FeedAdapter.FeedItemInterface, AdoptionDialog.AdoptionDialogListener{
+    FeedAdapter.FeedItemInterface, AdoptionDialog.AdoptionDialogListener {
 
     companion object {
         private const val PERMISSION_CODE = 42
     }
+
     private val viewModel by lazy {
         ViewModelProvider(this).get(FeedViewModel::class.java)
     }
@@ -66,8 +69,37 @@ class FeedActivity : AppCompatActivity(),
         observeEvents()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.home -> {
+                val intent = Intent(this, WelcomeActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.refresh -> {
+                refresh()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    fun refresh() {
+        val affection = intent.getIntExtra("affection", 0)
+        val freedom = intent.getIntExtra("freedom", 0)
+        val factorRisk = intent.getIntExtra("factorRisk", 0)
+        val animalType = intent.getIntExtra("animalType", 0)
+
+        viewModel.getListOfPets(affection, freedom, factorRisk, animalType)
+    }
+
     private fun getUsername() {
-        val sharedPreference =  getSharedPreferences("PREFERENCE_NAME",Context.MODE_PRIVATE)
+        val sharedPreference = getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
         username = sharedPreference.getString("username", "")
     }
 
@@ -265,8 +297,8 @@ class FeedActivity : AppCompatActivity(),
 
     override fun getDetails() {
         val intent = Intent(this, PetDetailsActivity::class.java)
-            val jsonPet = gson.toJson(pet)
-            intent.putExtra("pet", jsonPet)
-            startActivity(intent)
+        val jsonPet = gson.toJson(pet)
+        intent.putExtra("pet", jsonPet)
+        startActivity(intent)
     }
 }

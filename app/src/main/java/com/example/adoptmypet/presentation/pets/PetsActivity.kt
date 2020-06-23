@@ -4,8 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -13,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.adoptmypet.R
 import com.example.adoptmypet.models.Pet
 import com.example.adoptmypet.presentation.PetDetailsActivity
-import com.example.adoptmypet.utils.gson
+import com.example.adoptmypet.presentation.WelcomeActivity
 import com.example.adoptmypet.utils.service
 import kotlinx.android.synthetic.main.acitivity_pets.*
 import retrofit2.Call
@@ -21,7 +22,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class PetsActivity : AppCompatActivity(),
-    PetsAdapter.PetItemInterface{
+    PetsAdapter.PetItemInterface {
 
     private lateinit var adapter: PetsAdapter
     private val viewModel by lazy {
@@ -42,11 +43,30 @@ class PetsActivity : AppCompatActivity(),
         observeEvents()
 
         getUsername()
-        viewModel.getListOfPets(username?:"")
+        viewModel.getListOfPets(username ?: "")
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.home -> {
+                val intent = Intent(this, WelcomeActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.refresh -> {
+                viewModel.getListOfPets(username ?: "")
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun getUsername() {
-        val sharedPreference =  getSharedPreferences("PREFERENCE_NAME",Context.MODE_PRIVATE)
+        val sharedPreference = getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
         username = sharedPreference.getString("username", "")
     }
 
@@ -80,6 +100,7 @@ class PetsActivity : AppCompatActivity(),
                     override fun onFailure(call: Call<Unit>, t: Throwable) {
                         Log.e("", t.localizedMessage ?: "")
                     }
+
                     override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                         response.body().let {
                         }

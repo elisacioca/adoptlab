@@ -4,19 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:background="@drawable/background_gradient"
-    tools:context=".presentation.WelcomeActivity"
-    android:layout_gravity="center">
+    android:orientation="vertical"
+    tools:context=".presentation.WelcomeActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/home_menu"
+        />
 
     <LinearLayout
-        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="50dp"
-        android:orientation="vertical"
-        android:layout_marginBottom="50dp">
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/welcome"
@@ -39,15 +46,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:background="@drawable/empty_button_rounded"
+            android:onClick="onAdoptingSubmit"
             android:text="@string/adopting"
-            android:textSize="20sp"
-            android:onClick="onAdoptingSubmit"/>
+            android:textSize="20sp" />
+
         <TextView
-            android:layout_width="match_parent"
             style="@style/description"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/adopting_description"
-            />
+            android:text="@string/adopting_description" />
+
         <Button
             android:id="@+id/adopter"
             style="@style/loginButton"
@@ -55,15 +63,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:background="@drawable/empty_button_rounded"
+            android:onClick="onAdopterSubmit"
             android:text="@string/adopter"
-            android:textSize="20sp"
-            android:onClick="onAdopterSubmit"/>
+            android:textSize="20sp" />
+
         <TextView
-            android:layout_width="match_parent"
             style="@style/description"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/adopter_description"
-            />
+            android:text="@string/adopter_description" />
     </LinearLayout>
 
 </LinearLayout>

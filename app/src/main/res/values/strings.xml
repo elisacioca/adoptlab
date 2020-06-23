@@ -53,6 +53,8 @@
     <string name="erase">Sterge</string>
     <string name="fullName">Nume complet</string>
     <string name="phoneNo">Numarul de telefon</string>
+    <string name="my_pets">My pets</string>
+    <string name="home">Home</string>
     <string-array name="sex_array">
         <item>Feminin</item>
         <item>Masculin</item>
