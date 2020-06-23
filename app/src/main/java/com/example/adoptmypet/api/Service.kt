@@ -1,9 +1,11 @@
 package com.example.adoptmypet.api
+
 import android.location.Location
 import com.example.adoptmypet.models.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.http.*
 
 
@@ -16,20 +18,27 @@ interface Service {
     fun getPets(
     ): Call<List<Pet>>
 
-    @GET("api/pets/{affection}/{freedom}/{factorRisk}")
+    @GET("api/pets/{affection}/{freedom}/{factorRisk}/{animalType}/{locationId}")
     fun getPetsByStatistics(
         @Path("affection") affection: Int,
         @Path("freedom") freedom: Int,
-        @Path("factorRisk") factorRisk: Int
+        @Path("factorRisk") factorRisk: Int,
+        @Path("animalType") animalType: Int,
+        @Path("locationId") locationId: String
+    ): Call<List<Pet>>
+
+    @GET("api/pets/{username}/user")
+    fun getPetsForUser(
+        @Path("username") username: String
     ): Call<List<Pet>>
 
     @GET("api/adoptions")
     fun getAdoptions(
     ): Call<List<Adoption>>
 
-    @GET("api/adoptions/{username}")
-    fun getAdoptionsForUser(
-        @Path("username") username: String
+    @GET("api/adoptions/{petId}/pet")
+    fun getAdoptionsByStatistics(
+        @Path("petId") petId: String
     ): Call<List<Adoption>>
 
     @GET("api/fosters")
@@ -105,9 +114,9 @@ interface Service {
         @Path("id") id: Int
     ): Call<Question>
 
-    @GET("api/photos/{id}")
+    @GET("api/photos/{petId}")
     fun getPhoto(
-        @Path("id") id: String
+        @Path("petId") petId: String
     ): Call<Photo>
 
     @GET("api/contracts/{id}")
@@ -150,10 +159,12 @@ interface Service {
         @Body location: Location
     ): Call<Location>
 
+    @Multipart
     @POST("api/photos")
-    fun addPhoto(
-        @Body photo: Photo
-    ): Call<Photo>
+    fun addPhotoMultipart(
+        @Part("petId") petId: RequestBody?,
+        @Part photoFile: MultipartBody.Part?
+    ): Call<Unit>
 
     @POST("api/contracts")
     fun addContract(
@@ -169,6 +180,11 @@ interface Service {
     fun addAnswer(
         @Body answer: Answer
     ): Call<Answer>
+
+    @POST("api/locations")
+    fun addLocation(
+        @Body location: com.example.adoptmypet.models.Location
+    ): Call<com.example.adoptmypet.models.Location>
 
     @PUT("api/users/{id}")
     fun updateUser(

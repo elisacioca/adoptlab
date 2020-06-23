@@ -37,11 +37,25 @@
     <string name="addPet">Adauga</string>
     <string name="choose_photo_sample">Adauga poze cu animalutul tau</string>
     <string name="refresh">Refresh</string>
-    <string name="read_more">Read more</string>
-    <string name="adopt_now">Adopt now</string>
-    <string name="name_animal_item" >Name:</string>
-    <string name="breed_animal_item">Breed:</string>
-    <string name="color_animal_item">Color:</string>
-    <string name="age_animal_item">Age:</string>
+    <string name="read_more">Citeste mai mult</string>
+    <string name="adopt_now">Adopta acum</string>
+    <string name="name_animal_item">Nume:</string>
+    <string name="color_animal_item">Culoare:</string>
+    <string name="age_animal_item">Varsta:</string>
     <string name="unknown">unknown</string>
+    <string name="about_me">Despre mine</string>
+    <string name="color">Culoare</string>
+    <string name="age">Varsta</string>
+    <string name="personality">Scurta descriere</string>
+    <string name="myStory">Povestea mea</string>
+    <string name="cancel">Cancel</string>
+    <string name="candidates">Vezi aplicanti</string>
+    <string name="erase">Sterge</string>
+    <string name="fullName">Nume complet</string>
+    <string name="phoneNo">Numarul de telefon</string>
+    <string-array name="sex_array">
+        <item>Feminin</item>
+        <item>Masculin</item>
+        <item>Nestiut</item>
+    </string-array>
 </resources>

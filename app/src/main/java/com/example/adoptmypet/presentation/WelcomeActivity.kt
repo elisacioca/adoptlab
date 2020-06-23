@@ -7,6 +7,10 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.adoptmypet.*
 import com.example.adoptmypet.presentation.questionnaire.QuestionnaireActivity
+import com.example.adoptmypet.utils.ADOPTER
+import com.example.adoptmypet.utils.ADOPTING
+import com.example.adoptmypet.utils.EXTRA_USER_EMAIL
+import com.example.adoptmypet.utils.EXTRA_USER_ROLE
 import kotlinx.android.synthetic.main.activity_welcome.*
 
 

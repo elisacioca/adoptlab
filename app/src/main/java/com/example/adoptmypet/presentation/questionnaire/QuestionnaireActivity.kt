@@ -1,14 +1,18 @@
 package com.example.adoptmypet.presentation.questionnaire
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.adoptmypet.EXTRA_USER_ROLE
+import com.example.adoptmypet.utils.EXTRA_USER_ROLE
 import com.example.adoptmypet.R
 import com.example.adoptmypet.models.Answer
+import com.example.adoptmypet.presentation.feed.FeedActivity
+import com.example.adoptmypet.presentation.PetDescriptionActivity
+import com.example.adoptmypet.utils.ADOPTER
 import kotlinx.android.synthetic.main.activity_questionnaire.*
 
 class QuestionnaireActivity : AppCompatActivity(),
@@ -18,6 +22,9 @@ class QuestionnaireActivity : AppCompatActivity(),
     private var freedom = 0;
     private var factorRisk = 0;
     private var userRole = true;
+    private var questionnaire = "";
+    private var animalType = 0;
+    private var age: String? = "";
     lateinit var adapter: QuestionnaireAdapter
     private val viewModel by lazy {
         ViewModelProvider(this).get(QuestionnaireViewModel::class.java)
@@ -68,11 +75,22 @@ class QuestionnaireActivity : AppCompatActivity(),
         })
     }
 
-    override fun onItemClick(answer: Answer) {
-        questionNumber++
+    private fun populateExtras(answer: Answer, questionNumber: Int){
+        questionnaire = questionnaire + viewModel.listOfQuestions.value!![questionNumber-1].questionText + ":" + answer.content + "\n" ;
+        if (questionNumber == 1) {
+            animalType = if (answer.content=="O pisica") 0 else 1
+        }
+        if (userRole == ADOPTER && questionNumber == 2) {
+            age = answer.content;
+        }
         affection = affection + answer.affection!!
         freedom = freedom + answer.freedom!!
         factorRisk = factorRisk + answer.factorRisk!!
+    }
+
+    override fun onItemClick(answer: Answer) {
+        questionNumber++
+        populateExtras(answer, questionNumber);
 
         if (questionNumber < viewModel.listOfQuestions.value!!.count()) {
             if (viewModel.listOfQuestions.value.isNullOrEmpty().not()) {
@@ -87,14 +105,28 @@ class QuestionnaireActivity : AppCompatActivity(),
                 adapter.notifyDataSetChanged()
             }
         } else if (questionNumber == viewModel.listOfQuestions.value!!.count()) {
-            Toast.makeText(this, "Done, Affection: "+affection+", Freedom: "+freedom+" FactorRisk: "+factorRisk, Toast.LENGTH_LONG).show()
-            if (userRole)
-            {
-
-            }
-            else
-            {
-
+            Toast.makeText(
+                this,
+                "Done, Affection: " + affection + ", Freedom: " + freedom + " FactorRisk: " + factorRisk,
+                Toast.LENGTH_LONG
+            ).show()
+            if (!userRole) {
+                val intent = Intent(this, FeedActivity::class.java)
+                intent.putExtra("affection", affection)
+                intent.putExtra("freedom", freedom)
+                intent.putExtra("factorRisk", factorRisk)
+                intent.putExtra("questionnaire", questionnaire)
+                intent.putExtra("animalType", animalType)
+                startActivity(intent)
+            } else {
+                val intent = Intent(this, PetDescriptionActivity::class.java)
+                intent.putExtra("affection", affection)
+                intent.putExtra("freedom", freedom)
+                intent.putExtra("factorRisk", factorRisk)
+                intent.putExtra("questionnaire", questionnaire)
+                intent.putExtra("animalType", animalType)
+                intent.putExtra("age", age)
+                startActivity(intent)
             }
         }
     }

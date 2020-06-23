@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
-    tools:context=".presentation.WelcomeActivity">
+    tools:context=".presentation.WelcomeActivity"
+    android:layout_gravity="center">
 
     <LinearLayout
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="center"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:orientation="vertical"
@@ -35,7 +37,7 @@
             style="@style/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/empty_button_rounded"
             android:text="@string/adopting"
             android:textSize="20sp"
@@ -51,7 +53,7 @@
             style="@style/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/empty_button_rounded"
             android:text="@string/adopter"
             android:textSize="20sp"

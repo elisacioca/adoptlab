@@ -7,4 +7,6 @@
     <color name="facebookButton">#3A559F</color>
     <color name="deepBlue">#0E3183</color>
     <color name="blueDescription">#2A6F93</color>
+    <color name="blueDetails">#104965</color>
+    <color name="greyDetails">#4E646F</color>
 </resources>

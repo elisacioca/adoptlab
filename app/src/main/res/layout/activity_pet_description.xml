@@ -50,8 +50,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -68,13 +68,22 @@
                     android:inputType="text"
                     android:textColor="#FFFFFF" />
 
-                <EditText
+                <Spinner
                     android:id="@+id/petSex"
+                    style="@style/spinner"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/empty_button_rounded"
+                    android:inputType="text"
+                    android:textColor="#FFFFFF"
+                    android:entries="@array/sex_array"/>
+
+                <EditText
+                    android:id="@+id/petColor"
                     style="@style/loginInput"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/empty_button_rounded"
-                    android:hint="@string/petSex"
+                    android:hint="Culoarea/culorile"
                     android:inputType="text"
                     android:textColor="#FFFFFF" />
 
@@ -108,7 +117,8 @@
                     android:fontFamily="@font/opensans_regular"
                     android:text="@string/addPet"
                     android:textColor="@color/deepBlue"
-                    android:textSize="24dp" />
+                    android:textSize="24sp"
+                    android:onClick="onPetSubmit"/>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -22,6 +22,26 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColorHint">#879CA3</item>
         <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingLeft">10dp</item>
+    </style>
+
+    <style name="spinner">
+        <item name="android:fontFamily">@font/opensans_italic_light</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingLeft">10dp</item>
+    </style>
+
+    <style name="spinner_item">
+        <item name="android:fontFamily">@font/opensans_italic_light</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#879CA3</item>
         <item name="android:layout_marginTop">12dp</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:paddingLeft">10dp</item>
@@ -104,6 +124,30 @@
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textSize">24sp</item>
         <item name="fontFamily">@font/opensans_semibold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="pet_details">
+        <item name="android:textColor">@color/blueDetails</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/opensans_semibold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+    </style>
+    <style name="pet_details_small">
+        <item name="android:textColor">@color/blueDetails</item>
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/opensans_regular</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+    <style name="pet_details_grey">
+        <item name="android:textColor">@color/greyDetails</item>
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/opensans_light</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>
     </style>

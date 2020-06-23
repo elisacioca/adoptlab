@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         val sharedPreference =  getSharedPreferences("PREFERENCE_NAME",Context.MODE_PRIVATE)
         var editor = sharedPreference.edit()
         editor.putString("token",user.token)
+        editor.putString("username", user.username)
         editor.commit()
         intent.putExtra("user_name", user.name)
         intent.putExtra("user_email", user.username)

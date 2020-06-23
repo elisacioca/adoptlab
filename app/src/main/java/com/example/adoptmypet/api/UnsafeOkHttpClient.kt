@@ -2,6 +2,7 @@ package com.example.adoptmypet.api
 
 import okhttp3.OkHttpClient
 import java.security.cert.CertificateException
+import java.util.concurrent.TimeUnit
 import javax.net.ssl.HostnameVerifier
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
@@ -43,6 +44,10 @@ object UnsafeOkHttpClient {
                 trustAllCerts[0] as X509TrustManager
             )
             builder.hostnameVerifier(HostnameVerifier { p0, p1 -> true })
+
+            builder.connectTimeout(5, TimeUnit.MINUTES) // connect timeout
+                .writeTimeout(5, TimeUnit.MINUTES) // write timeout
+                .readTimeout(5, TimeUnit.MINUTES); // read timeout
 
             return builder
         } catch (e: Exception) {

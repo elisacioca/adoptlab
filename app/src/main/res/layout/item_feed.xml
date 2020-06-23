@@ -37,7 +37,7 @@
             app:layout_constraintWidth_percent="0.5" />
 
         <Button
-            android:id="@+id/brnAdopt"
+            android:id="@+id/btnAdopt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
@@ -71,20 +71,12 @@
             app:layout_constraintTop_toTopOf="@id/tvName" />
 
         <TextView
-            android:id="@+id/tvBreed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/breed_animal_item"
-            app:layout_constraintStart_toStartOf="@id/tvName"
-            app:layout_constraintTop_toBottomOf="@id/tvName" />
-
-        <TextView
             android:id="@+id/tvColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/color_animal_item"
             app:layout_constraintStart_toStartOf="@id/tvName"
-            app:layout_constraintTop_toBottomOf="@id/tvBreed" />
+            app:layout_constraintTop_toBottomOf="@id/tvNameValue" />
 
         <TextView
             android:id="@+id/tvColorValue"

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.example.adoptmypet.models.Adoption" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_gradient">
+        <LinearLayout
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFF"
+                android:textSize="20sp"
+                android:fontFamily="@font/opensans_semibold"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                tools:text="@string/fullName"
+                android:text="@{item.fullNameAdopter}"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFF"
+                android:textSize="20sp"
+                android:fontFamily="@font/opensans_semibold"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                tools:text="Numar de telefon"
+                android:text="@{item.telephoneNo}"/>
+            <Button
+                android:id="@+id/buttonDetails"
+                android:layout_width="match_parent"
+                style="@style/loginButton"
+                android:layout_height="wrap_content"
+                android:background="@drawable/empty_button"
+                android:layout_margin="10dp"
+                android:text="Vezi raspunsurile la chestionar"
+                android:textSize="20sp"
+                android:gravity="center_vertical"
+                android:layout_gravity="left"
+                android:padding="10dp"/>
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
