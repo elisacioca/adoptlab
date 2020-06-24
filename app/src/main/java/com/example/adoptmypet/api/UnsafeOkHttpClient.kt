@@ -45,6 +45,10 @@ object UnsafeOkHttpClient {
             )
             builder.hostnameVerifier(HostnameVerifier { p0, p1 -> true })
 
+            builder.connectTimeout(5, TimeUnit.MINUTES) // connect timeout
+                .writeTimeout(5, TimeUnit.MINUTES) // write timeout
+                .readTimeout(5, TimeUnit.MINUTES); // read timeout
+
             return builder
         } catch (e: Exception) {
             throw RuntimeException(e)
