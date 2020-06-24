@@ -20,7 +20,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".presentation.adoption_details.AdoptionDetailsActivity"></activity>
+        <activity android:name=".presentation.SplashScreen"></activity>
+        <activity android:name=".presentation.adoption_details.AdoptionDetailsActivity" />
         <activity android:name=".presentation.PetDetailsActivity" />
         <activity android:name=".presentation.pets.PetsActivity" />
         <activity android:name=".presentation.adoptions.AdoptionsActivity" />

@@ -1,28 +1,23 @@
 package com.example.adoptmypet.presentation.adoptions
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.WindowManager
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.adoptmypet.R
 import com.example.adoptmypet.models.Adoption
-import com.example.adoptmypet.models.Pet
-import com.example.adoptmypet.presentation.PetDetailsActivity
+import com.example.adoptmypet.presentation.WelcomeActivity
 import com.example.adoptmypet.presentation.adoption_details.AdoptionDetailsActivity
 import com.example.adoptmypet.utils.gson
-import com.example.adoptmypet.utils.service
 import kotlinx.android.synthetic.main.acitivity_pets.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.android.synthetic.main.activity_adoption.*
 
 class AdoptionsActivity : AppCompatActivity(),
-    AdoptionsAdapter.AdoptionItemInterface{
+    AdoptionsAdapter.AdoptionItemInterface {
 
     private lateinit var adapter: AdoptionsAdapter
     private val viewModel by lazy {
@@ -43,7 +38,26 @@ class AdoptionsActivity : AppCompatActivity(),
         observeEvents()
 
         petId = intent.getStringExtra("petId")
-        viewModel.getListOfAdoptions(petId?:"")
+        viewModel.getListOfAdoptions(petId ?: "")
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.home -> {
+                val intent = Intent(this, WelcomeActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.refresh -> {
+                viewModel.getListOfAdoptions(petId?:"")
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun observeEvents() {
@@ -62,7 +76,7 @@ class AdoptionsActivity : AppCompatActivity(),
                 listOfAdoptions,
                 this
             )
-        rvPets.adapter = adapter
+        rvAdoption.adapter = adapter
     }
 
     override fun onDetailsItemClicked(item: Adoption) {

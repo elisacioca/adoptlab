@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="item"
             type="com.example.adoptmypet.models.Pet" />
@@ -16,9 +17,11 @@
         <ImageView
             android:id="@+id/ivAnimal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:background="#A6A6A6"
+            android:scaleType="centerCrop"
             android:src="@drawable/logo_adoptlab"
+            app:layout_constraintHeight_percent="0.3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

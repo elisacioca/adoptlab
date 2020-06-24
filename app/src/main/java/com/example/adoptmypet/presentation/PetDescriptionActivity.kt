@@ -28,6 +28,7 @@ import com.example.adoptmypet.R
 import com.example.adoptmypet.api.ServiceFactory
 import com.example.adoptmypet.models.Location
 import com.example.adoptmypet.models.Pet
+import com.example.adoptmypet.presentation.dialogs.ErrorDialog
 import com.example.adoptmypet.presentation.pets.PetsActivity
 import com.example.adoptmypet.presentation.pets.PetsAdapter
 import com.google.android.gms.location.*
@@ -145,6 +146,8 @@ class PetDescriptionActivity : AppCompatActivity() {
         ServiceFactory.service.addPet(pet)
             .enqueue(object : Callback<Pet> {
                 override fun onFailure(call: Call<Pet>, t: Throwable) {
+                    val dialog: ErrorDialog = ErrorDialog
+                    dialog.show(supportFragmentManager, "Error")
                     TODO("Not yet implemented")
                 }
                 override fun onResponse(
@@ -170,7 +173,8 @@ class PetDescriptionActivity : AppCompatActivity() {
                     call: Call<Location>,
                     t: Throwable
                 ) {
-                    TODO("Not yet implemented")
+                    val dialog: ErrorDialog = ErrorDialog
+                    dialog.show(supportFragmentManager, "Error")
                 }
 
                 override fun onResponse(
@@ -221,7 +225,8 @@ class PetDescriptionActivity : AppCompatActivity() {
             ServiceFactory.service.addPhotoMultipart(petInfo, part)
                 .enqueue(object : Callback<Unit> {
                     override fun onFailure(call: Call<Unit>, t: Throwable) {
-                        TODO("Not yet implemented")
+                        val dialog: ErrorDialog = ErrorDialog
+                        dialog.show(supportFragmentManager, "Error")
                     }
                     override fun onResponse(
                         call: Call<Unit>,

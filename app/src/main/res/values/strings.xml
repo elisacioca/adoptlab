@@ -59,6 +59,10 @@
         Acum ramane sa astepti telefonul stapanului in cazul in care considera ca cea mai potrivita casa pentru micut este chiar a ta.</string>
     <string name="youSure">Esti sigur ca vrei sa stergi?</string>
     <string name="youSureMore">Daca nu ai reusit sa gasesti stapan pentru animalul tau si ti-ai pierdut speranta incearca sa ne mai oferi o sansa. Poate chiar maine va aparea persoana potrivita.</string>
+    <string name="my_pets">My pets</string>
+    <string name="home">Home</string>
+    <string name="nici_un_rezultat_gasit">Ne pare rau, nu s-a gasit nici un rezultat gasit</string>
+    <string name="ne_pare_rau_am_intampinat_o_problema">Ne pare rau, am intampinat o problema.</string>
     <string-array name="sex_array">
         <item>Feminin</item>
         <item>Masculin</item>

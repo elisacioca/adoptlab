@@ -12,6 +12,7 @@ import com.example.adoptmypet.models.Adoption
 import com.example.adoptmypet.models.Pet
 import com.example.adoptmypet.presentation.dialogs.AdoptionDialog
 import com.example.adoptmypet.presentation.dialogs.AdoptionDialogNoDetails
+import com.example.adoptmypet.presentation.dialogs.ErrorDialog
 import com.example.adoptmypet.presentation.dialogs.SuccessDialog
 import com.example.adoptmypet.utils.GlideUtil
 import com.example.adoptmypet.utils.gson
@@ -68,7 +69,8 @@ class PetDetailsActivity : AppCompatActivity(), AdoptionDialogNoDetails.Adoption
             service.addAdoption(adoption)
                 .enqueue(object : Callback<Adoption> {
                 override fun onFailure(call: Call<Adoption>, t: Throwable) {
-                    Log.e("FeedViewModel", t.localizedMessage ?: "")
+                    val dialog: ErrorDialog = ErrorDialog
+                    dialog.show(supportFragmentManager, "Error")
                 }
                 override fun onResponse(call: Call<Adoption>, response: Response<Adoption>) {
                     response.body().let {

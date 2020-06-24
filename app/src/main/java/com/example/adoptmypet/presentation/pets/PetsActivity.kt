@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -12,6 +14,9 @@ import com.example.adoptmypet.R
 import com.example.adoptmypet.models.Pet
 import com.example.adoptmypet.presentation.PetDetailsActivity
 import com.example.adoptmypet.presentation.dialogs.ErasePetDialog
+import com.example.adoptmypet.presentation.WelcomeActivity
+import com.example.adoptmypet.presentation.adoptions.AdoptionsActivity
+import com.example.adoptmypet.presentation.dialogs.ErrorDialog
 import com.example.adoptmypet.utils.service
 import kotlinx.android.synthetic.main.acitivity_pets.*
 import retrofit2.Call
@@ -41,11 +46,30 @@ class PetsActivity : AppCompatActivity(),
         observeEvents()
 
         getUsername()
-        viewModel.getListOfPets(username?:"")
+        viewModel.getListOfPets(username ?: "")
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.home -> {
+                val intent = Intent(this, WelcomeActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.refresh -> {
+                viewModel.getListOfPets(username ?: "")
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun getUsername() {
-        val sharedPreference =  getSharedPreferences("PREFERENCE_NAME",Context.MODE_PRIVATE)
+        val sharedPreference = getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
         username = sharedPreference.getString("username", "")
     }
 
@@ -69,14 +93,13 @@ class PetsActivity : AppCompatActivity(),
     }
 
     override fun onEraseClicked(item: Pet) {
-
         val dialog: ErasePetDialog = ErasePetDialog()
         dialog.show(supportFragmentManager, "Erase")
     }
 
     override fun onSeeCandidatesClicked(item: Pet) {
         pet = item
-        val intent = Intent(this, PetDetailsActivity::class.java)
+        val intent = Intent(this, AdoptionsActivity::class.java)
         intent.putExtra("petId", item.petId)
         startActivity(intent)
     }
@@ -86,8 +109,10 @@ class PetsActivity : AppCompatActivity(),
             service.deletePet(pet!!.petId!!)
                 .enqueue(object : Callback<Unit> {
                     override fun onFailure(call: Call<Unit>, t: Throwable) {
-                        Log.e("", t.localizedMessage ?: "")
+                        val dialog: ErrorDialog = ErrorDialog
+                        dialog.show(supportFragmentManager, "Error")
                     }
+
                     override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                         response.body().let {
 
