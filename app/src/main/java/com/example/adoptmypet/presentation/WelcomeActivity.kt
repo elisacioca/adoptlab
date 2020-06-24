@@ -2,10 +2,7 @@ package com.example.adoptmypet.presentation
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.view.WindowManager
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.adoptmypet.R
 import com.example.adoptmypet.presentation.pets.PetsActivity
@@ -34,7 +31,7 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater = menuInflater
+        val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.home_menu, menu)
         return true
     }

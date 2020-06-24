@@ -11,7 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.adoptmypet.R
 import com.example.adoptmypet.models.Adoption
 import com.example.adoptmypet.presentation.WelcomeActivity
+import com.example.adoptmypet.presentation.adoption_details.AdoptionDetailsActivity
+import com.example.adoptmypet.utils.gson
 import kotlinx.android.synthetic.main.acitivity_pets.*
+import kotlinx.android.synthetic.main.activity_adoption.*
 
 class AdoptionsActivity : AppCompatActivity(),
     AdoptionsAdapter.AdoptionItemInterface {
@@ -30,7 +33,7 @@ class AdoptionsActivity : AppCompatActivity(),
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
-        setContentView(R.layout.acitivity_pets)
+        setContentView(R.layout.activity_adoption)
         setupAdapter()
         observeEvents()
 
@@ -73,10 +76,13 @@ class AdoptionsActivity : AppCompatActivity(),
                 listOfAdoptions,
                 this
             )
-        rvPets.adapter = adapter
+        rvAdoption.adapter = adapter
     }
 
     override fun onDetailsItemClicked(item: Adoption) {
-
+        val intent = Intent(this, AdoptionDetailsActivity::class.java)
+        val jsonPet = gson.toJson(item)
+        intent.putExtra("adoption", jsonPet)
+        startActivity(intent)
     }
 }

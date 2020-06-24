@@ -35,9 +35,6 @@ class FeedAdapter(private val items: List<Pet>, private val clickAdapter: FeedIt
         ) {
             GlideUtil.loadImage(view = view.ivAnimal, id = item.petId)
             view.item = item
-            view.root.setOnClickListener {
-                clickAdapter.onItemClicked(item)
-            }
             view.btnReadMore.setOnClickListener {
                 clickAdapter.onReadMoreClicked(item)
             }
@@ -48,7 +45,6 @@ class FeedAdapter(private val items: List<Pet>, private val clickAdapter: FeedIt
     }
 
     interface FeedItemInterface {
-        fun onItemClicked(item: Pet)
         fun onReadMoreClicked(item: Pet)
         fun onAdoptClicked(item: Pet)
     }

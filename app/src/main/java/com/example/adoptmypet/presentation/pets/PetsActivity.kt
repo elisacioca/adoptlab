@@ -7,14 +7,16 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.adoptmypet.R
 import com.example.adoptmypet.models.Pet
 import com.example.adoptmypet.presentation.PetDetailsActivity
+import com.example.adoptmypet.presentation.dialogs.ErasePetDialog
 import com.example.adoptmypet.presentation.WelcomeActivity
+import com.example.adoptmypet.presentation.adoptions.AdoptionsActivity
+import com.example.adoptmypet.presentation.dialogs.ErrorDialog
 import com.example.adoptmypet.utils.service
 import kotlinx.android.synthetic.main.acitivity_pets.*
 import retrofit2.Call
@@ -22,7 +24,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class PetsActivity : AppCompatActivity(),
-    PetsAdapter.PetItemInterface {
+    PetsAdapter.PetItemInterface, ErasePetDialog.ErasePetDialogListener{
 
     private lateinit var adapter: PetsAdapter
     private val viewModel by lazy {
@@ -31,6 +33,7 @@ class PetsActivity : AppCompatActivity(),
 
     val listOfPets = mutableListOf<Pet>()
     var username: String? = ""
+    var pet: Pet? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,35 +93,34 @@ class PetsActivity : AppCompatActivity(),
     }
 
     override fun onEraseClicked(item: Pet) {
-        val alertDialogBuilder = AlertDialog.Builder(this)
-        alertDialogBuilder.setTitle("Esti sigur ca vrei sa stergi?")
-        alertDialogBuilder.setMessage("Daca nu ai reusit sa gasesti stapan pentru animalul tau si ti-ai pierdut speranta incearca sa ne mai oferi o sansa. Poate chiar maine va aparea persoana potrivita.")
+        val dialog: ErasePetDialog = ErasePetDialog()
+        dialog.show(supportFragmentManager, "Erase")
+    }
 
-        alertDialogBuilder.setPositiveButton("Sunt sigur!") { dialog, which ->
-            service.deletePet(item.petId!!)
+    override fun onSeeCandidatesClicked(item: Pet) {
+        pet = item
+        val intent = Intent(this, AdoptionsActivity::class.java)
+        intent.putExtra("petId", item.petId)
+        startActivity(intent)
+    }
+
+    override fun erasePet() {
+        if(pet != null) {
+            service.deletePet(pet!!.petId!!)
                 .enqueue(object : Callback<Unit> {
                     override fun onFailure(call: Call<Unit>, t: Throwable) {
-                        Log.e("", t.localizedMessage ?: "")
+                        val dialog: ErrorDialog = ErrorDialog
+                        dialog.show(supportFragmentManager, "Error")
                     }
 
                     override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                         response.body().let {
+
                         }
                     }
                 })
             finish();
             startActivity(getIntent());
         }
-
-        alertDialogBuilder.setNegativeButton("Cancel") { dialog, which ->
-        }
-
-        alertDialogBuilder.show()
-    }
-
-    override fun onSeeCandidatesClicked(item: Pet) {
-        val intent = Intent(this, PetDetailsActivity::class.java)
-        intent.putExtra("petId", item.petId)
-        startActivity(intent)
     }
 }

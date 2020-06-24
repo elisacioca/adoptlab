@@ -9,6 +9,7 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
@@ -22,9 +23,11 @@ import com.example.adoptmypet.api.ServiceFactory
 import com.example.adoptmypet.models.Adoption
 import com.example.adoptmypet.models.Location
 import com.example.adoptmypet.models.Pet
-import com.example.adoptmypet.presentation.AdoptionDialog
+import com.example.adoptmypet.presentation.dialogs.AdoptionDialog
 import com.example.adoptmypet.presentation.PetDetailsActivity
+import com.example.adoptmypet.presentation.dialogs.SuccessDialog
 import com.example.adoptmypet.presentation.WelcomeActivity
+import com.example.adoptmypet.presentation.dialogs.ErrorDialog
 import com.example.adoptmypet.utils.gson
 import com.example.adoptmypet.utils.service
 import com.google.android.gms.location.*
@@ -124,7 +127,8 @@ class FeedActivity : AppCompatActivity(),
                     call: Call<Location>,
                     t: Throwable
                 ) {
-                    TODO("Not yet implemented")
+                    val dialog: ErrorDialog = ErrorDialog
+                    dialog.show(supportFragmentManager, "Error")
                 }
 
                 override fun onResponse(
@@ -264,20 +268,18 @@ class FeedActivity : AppCompatActivity(),
         rvFeed.adapter = adapter
     }
 
-    override fun onItemClicked(item: Pet) {
-        TODO("Not yet implemented")
-    }
-
     override fun onReadMoreClicked(item: Pet) {
         val intent = Intent(this, PetDetailsActivity::class.java)
         val jsonPet = gson.toJson(item)
         intent.putExtra("pet", jsonPet)
+        intent.putExtra("questionnaire", questionnaire)
         startActivity(intent)
     }
 
     override fun onAdoptClicked(item: Pet) {
         pet = item
-        val dialog: AdoptionDialog = AdoptionDialog()
+        val dialog: AdoptionDialog =
+            AdoptionDialog()
         dialog.show(supportFragmentManager, "Adoption dialog")
     }
 
@@ -291,7 +293,18 @@ class FeedActivity : AppCompatActivity(),
                 fullNameAdopter = fullName,
                 questionnaireAdopter = questionnaire
             )
-            service.addAdoption(adoption)
+            service.addAdoption(adoption) .enqueue(object : Callback<Adoption> {
+                override fun onFailure(call: Call<Adoption>, t: Throwable) {
+                    val dialog: ErrorDialog = ErrorDialog
+                    dialog.show(supportFragmentManager, "Error")
+                }
+                override fun onResponse(call: Call<Adoption>, response: Response<Adoption>) {
+                    response.body().let {
+                        val dialog: SuccessDialog = SuccessDialog()
+                        dialog.show(supportFragmentManager, "Success")
+                    }
+                }
+            })
         }
     }
 

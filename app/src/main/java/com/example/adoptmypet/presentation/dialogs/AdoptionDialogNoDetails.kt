@@ -1,19 +1,16 @@
-package com.example.adoptmypet.presentation
+package com.example.adoptmypet.presentation.dialogs
 
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatDialogFragment
 import com.example.adoptmypet.R
-import com.example.adoptmypet.utils.gson
 import kotlinx.android.synthetic.main.alert_adoption.*
 
-class AdoptionDialog: AppCompatDialogFragment() {
+class AdoptionDialogNoDetails: AppCompatDialogFragment() {
 
     lateinit var phoneno: String
     lateinit var fullname: String
@@ -35,9 +32,6 @@ class AdoptionDialog: AppCompatDialogFragment() {
             }
             .setNegativeButton("Cancel") { dialog, which ->
             }
-            .setNeutralButton("Vezi mai multe detalii") { dialog, which ->
-                listener?.getDetails()
-            }
         return builder.create()
     }
 
@@ -48,6 +42,5 @@ class AdoptionDialog: AppCompatDialogFragment() {
 
     interface AdoptionDialogListener{
         fun applyText(fullName: String, phoneNo: String)
-        fun getDetails()
     }
 }

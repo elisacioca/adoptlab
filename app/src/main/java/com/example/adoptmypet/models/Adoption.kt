@@ -1,7 +1,7 @@
 package com.example.adoptmypet.models
 
 data class Adoption (
-    var id: String? = null,
+    var adoptionId: String? = null,
     var userAdopterId: String?,
     var telephoneNo: String?,
     var fullNameAdopter: String?,

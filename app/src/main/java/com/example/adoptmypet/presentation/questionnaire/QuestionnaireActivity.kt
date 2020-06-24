@@ -12,11 +12,13 @@ import com.example.adoptmypet.R
 import com.example.adoptmypet.models.Answer
 import com.example.adoptmypet.presentation.feed.FeedActivity
 import com.example.adoptmypet.presentation.PetDescriptionActivity
+import com.example.adoptmypet.presentation.WelcomeActivity
+import com.example.adoptmypet.presentation.dialogs.FactorRiskDialog
 import com.example.adoptmypet.utils.ADOPTER
 import kotlinx.android.synthetic.main.activity_questionnaire.*
 
 class QuestionnaireActivity : AppCompatActivity(),
-    QuestionnaireAdapter.QuestionnaireInterface {
+    QuestionnaireAdapter.QuestionnaireInterface, FactorRiskDialog.FactorRiskListener{
     private var questionNumber = 0;
     private var affection = 0;
     private var freedom = 0;
@@ -117,6 +119,13 @@ class QuestionnaireActivity : AppCompatActivity(),
                 intent.putExtra("factorRisk", factorRisk)
                 intent.putExtra("questionnaire", questionnaire)
                 intent.putExtra("animalType", animalType)
+
+                if(factorRisk > 10)
+                {
+                    val dialog: FactorRiskDialog = FactorRiskDialog()
+                    dialog.show(supportFragmentManager, "Oops")
+                }
+
                 startActivity(intent)
             } else {
                 val intent = Intent(this, PetDescriptionActivity::class.java)
@@ -129,5 +138,10 @@ class QuestionnaireActivity : AppCompatActivity(),
                 startActivity(intent)
             }
         }
+    }
+
+    override fun backToHome() {
+        val intent = Intent(this, WelcomeActivity::class.java)
+        startActivity(intent)
     }
 }

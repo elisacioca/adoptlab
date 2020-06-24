@@ -3,6 +3,7 @@ package com.example.adoptmypet.presentation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -12,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.adoptmypet.R
 import com.example.adoptmypet.api.ServiceFactory
 import com.example.adoptmypet.models.User
+import com.example.adoptmypet.presentation.dialogs.ErrorDialog
+import com.example.adoptmypet.utils.service
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,20 +30,51 @@ class MainActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         setContentView(R.layout.activity_main)
+
         logoImage.animation = AnimationUtils.loadAnimation(
             this,
             R.anim.top_fade_animation
         )
+
+        Handler().postDelayed(this::verifyLogin, 2500)
+
         butttonsLayout.animation = AnimationUtils.loadAnimation(
             this,
             R.anim.fade_animation
         )
+
         registerReference.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
+    }
 
-        ErrorDialog.show(this)
+    private fun verifyLogin() {
+        val sharedPreference =  getSharedPreferences("PREFERENCE_NAME",Context.MODE_PRIVATE)
+        if(sharedPreference.getString("token", "") != ""){
+            val intent = Intent(this, WelcomeActivity::class.java)
+            val username= sharedPreference.getString("username", "")
+            intent.putExtra("user_email", username)
+            service.getUser(username!!)
+                .enqueue(
+                    object : Callback<User> {
+                        override fun onFailure(call: Call<User>, t: Throwable) {
+                            val dialog: ErrorDialog = ErrorDialog
+                            dialog.show(supportFragmentManager, "Error")
+                        }
+
+                        override fun onResponse(call: Call<User>, response: Response<User>) {
+                            if (response.isSuccessful) {
+                                response.body().let { userReceived ->
+                                    if (userReceived != null) {
+                                        intent.putExtra("user_name", userReceived.name)
+                                        startActivity(intent)
+                                    };
+                                }
+                            }
+                        }
+                    })
+        }
     }
 
     fun onLoginSubmit(view: View) {
@@ -51,6 +85,8 @@ class MainActivity : AppCompatActivity() {
             object : Callback<User> {
                 override fun onFailure(call: Call<User>, t: Throwable) {
                     Log.e("MainActivity", t.localizedMessage)
+                    val dialog: ErrorDialog = ErrorDialog
+                    dialog.show(supportFragmentManager, "Error")
                 }
 
                 override fun onResponse(call: Call<User>, response: Response<User>) {
