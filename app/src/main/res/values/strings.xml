@@ -1,17 +1,13 @@
 <resources>
     <string name="app_name">AdoptMyPet</string>
-    <string name="google_login">Continue with Google</string>
-    <string name="facebook_login">Continue with Facebook</string>
     <string name="email">Email</string>
-    <string name="password">Password</string>
+    <string name="password">Parola</string>
     <string name="name">Name</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
-    <string name="forget_password">Forgot Password?</string>
-    <string name="create_account">Create a new account</string>
-    <string name="separator">|</string>
-    <string name="terms"><u>Terms and Conditions</u></string>
-    <string name="privacy"><u>Privacy Policy</u></string>
+    <string name="create_account">Creeaza un cont nou</string>
+    <string name="terms"><u>Termeni si conditii</u></string>
+    <string name="privacy"><u>Politica datelor personale</u></string>
     <string name="welcome">Bine ai venit %1$s!</string>
     <string name="thank_you">Multumim ca ati ales sa folositi aplicatia noastra. Pentru a incepe cautarile animalutului perfect pentru tine sau pentru a gasi un stapan responsabil pentru animalutul tau va trebui sa raspunzi la cateva intrebari.</string>
     <string name="adopting">Vreau sa adopt</string>

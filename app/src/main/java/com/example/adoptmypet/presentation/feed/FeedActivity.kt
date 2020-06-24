@@ -28,6 +28,7 @@ import com.example.adoptmypet.presentation.PetDetailsActivity
 import com.example.adoptmypet.presentation.dialogs.SuccessDialog
 import com.example.adoptmypet.presentation.WelcomeActivity
 import com.example.adoptmypet.presentation.dialogs.ErrorDialog
+import com.example.adoptmypet.presentation.dialogs.FactorRiskDialog
 import com.example.adoptmypet.utils.gson
 import com.example.adoptmypet.utils.service
 import com.google.android.gms.location.*
@@ -37,7 +38,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FeedActivity : AppCompatActivity(),
-    FeedAdapter.FeedItemInterface, AdoptionDialog.AdoptionDialogListener {
+    FeedAdapter.FeedItemInterface, AdoptionDialog.AdoptionDialogListener, FactorRiskDialog.FactorRiskListener {
 
     companion object {
         private const val PERMISSION_CODE = 42
@@ -64,12 +65,25 @@ class FeedActivity : AppCompatActivity(),
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         setContentView(R.layout.activity_feed)
+
+        verifyIfFactorRisk()
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         questionnaire = intent.getStringExtra("questionnaire")
         setupAdapter()
         getUsername()
         getLastLocation()
         observeEvents()
+    }
+
+    private fun verifyIfFactorRisk() {
+        val factorRisk = intent.getIntExtra("factorRisk", 0)
+        if(factorRisk > 10)
+        {
+            val dialog: FactorRiskDialog = FactorRiskDialog()
+            dialog.show(supportFragmentManager, "Oops")
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -312,6 +326,11 @@ class FeedActivity : AppCompatActivity(),
         val intent = Intent(this, PetDetailsActivity::class.java)
         val jsonPet = gson.toJson(pet)
         intent.putExtra("pet", jsonPet)
+        startActivity(intent)
+    }
+
+    override fun backToHome() {
+        val intent = Intent(this, WelcomeActivity::class.java)
         startActivity(intent)
     }
 }

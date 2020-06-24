@@ -32,20 +32,6 @@
         app:layout_constraintTop_toBottomOf="@+id/logoImage"
         app:layout_constraintWidth_percent="0.75">
 
-        <Button
-            android:id="@+id/googleButton"
-            style="@style/loginButton"
-            android:layout_width="match_parent"
-            android:background="@drawable/google_button_rounded"
-            android:text="@string/google_login" />
-
-        <Button
-            android:id="@+id/facebookButton"
-            style="@style/loginButton"
-            android:layout_width="match_parent"
-            android:background="@drawable/facebook_button_rounded"
-            android:text="@string/facebook_login" />
-
         <EditText
             android:id="@+id/tvEmail"
             style="@style/loginInput"
@@ -53,6 +39,7 @@
             android:background="@drawable/empty_button_rounded"
             android:hint="@string/email"
             android:inputType="text"
+            android:layout_marginTop="80dp"
             android:textColor="#FFFFFF" />
 
         <EditText
@@ -91,17 +78,6 @@
                 android:layout_height="match_parent"
                 android:text="@string/create_account" />
 
-            <TextView
-                style="@style/loginText"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/separator" />
-
-            <TextView
-                style="@style/loginText"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/forget_password" />
         </LinearLayout>
 
         <TextView

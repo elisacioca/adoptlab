@@ -17,7 +17,7 @@ class ErasePetDialog : AppCompatDialogFragment() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(activity)
 
         val layoutInf: LayoutInflater = activity?.layoutInflater!!;
-        val view: View = layoutInf.inflate(R.layout.alert_adoption, null)
+        val view: View = layoutInf.inflate(R.layout.alert_erase_pet, null)
 
         builder.setView(view)
             .setTitle("Esti sigur?")

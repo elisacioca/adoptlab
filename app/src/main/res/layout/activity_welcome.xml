@@ -10,6 +10,7 @@
     tools:context=".presentation.WelcomeActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/home_menu"

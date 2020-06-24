@@ -51,29 +51,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun verifyLogin() {
         val sharedPreference =  getSharedPreferences("PREFERENCE_NAME",Context.MODE_PRIVATE)
-        if(sharedPreference.getString("token", "") != ""){
+        if(sharedPreference.getString("token", "") != "") {
             val intent = Intent(this, WelcomeActivity::class.java)
-            val username= sharedPreference.getString("username", "")
-            intent.putExtra("user_email", username)
-            service.getUser(username!!)
-                .enqueue(
-                    object : Callback<User> {
-                        override fun onFailure(call: Call<User>, t: Throwable) {
-                            val dialog: ErrorDialog = ErrorDialog
-                            dialog.show(supportFragmentManager, "Error")
-                        }
-
-                        override fun onResponse(call: Call<User>, response: Response<User>) {
-                            if (response.isSuccessful) {
-                                response.body().let { userReceived ->
-                                    if (userReceived != null) {
-                                        intent.putExtra("user_name", userReceived.name)
-                                        startActivity(intent)
-                                    };
-                                }
-                            }
-                        }
-                    })
+            startActivity(intent)
         }
     }
 
@@ -113,9 +93,8 @@ class MainActivity : AppCompatActivity() {
         var editor = sharedPreference.edit()
         editor.putString("token", user.token)
         editor.putString("username", user.username)
+        editor.putString("name", user.name)
         editor.commit()
-        intent.putExtra("user_name", user.name)
-        intent.putExtra("user_email", user.username)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent)
     }

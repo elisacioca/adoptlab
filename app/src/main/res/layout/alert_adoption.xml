@@ -2,9 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp">
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/fullName"
@@ -15,10 +13,12 @@
         android:textSize="12sp"
         android:fontFamily="@font/opensans_regular"
         android:hint="@string/fullName"
-        android:paddingLeft="10dp"/>
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"/>
     <EditText
         android:id="@+id/phoneNo"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@drawable/input_rounded"
@@ -27,5 +27,8 @@
         android:fontFamily="@font/opensans_regular"
         android:hint="@string/phoneNo"
         android:paddingLeft="10dp"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
 </LinearLayout>
