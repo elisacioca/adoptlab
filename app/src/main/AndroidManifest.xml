@@ -20,7 +20,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".presentation.SplashScreen"></activity>
         <activity android:name=".presentation.adoption_details.AdoptionDetailsActivity" />
         <activity android:name=".presentation.PetDetailsActivity" />
         <activity android:name=".presentation.pets.PetsActivity" />
@@ -28,15 +27,15 @@
         <activity android:name=".presentation.PetDescriptionActivity" />
         <activity android:name=".presentation.feed.FeedActivity" />
         <activity android:name=".presentation.questionnaire.QuestionnaireActivity" />
-        <activity android:name=".presentation.WelcomeActivity" />
-        <activity android:name=".presentation.RegisterActivity" />
-        <activity android:name=".presentation.MainActivity">
+        <activity android:name=".presentation.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".presentation.RegisterActivity" />
+        <activity android:name=".presentation.MainActivity"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
