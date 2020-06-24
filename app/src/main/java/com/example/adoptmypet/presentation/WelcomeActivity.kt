@@ -30,10 +30,10 @@ class WelcomeActivity : AppCompatActivity(), DataProtectionDialog.DataProtection
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         setContentView(R.layout.activity_welcome)
+        sharedPreference = getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
         val name = intent.getStringExtra("user_name")
         username = intent.getStringExtra("user_email")
         welcome.text = "Bine ai venit " + name + "!"
-        sharedPreference = getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
 
         checkDataProtection()
     }
